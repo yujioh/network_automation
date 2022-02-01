@@ -22,7 +22,7 @@
 
     - name: "TASK 2: REGISTER OUTPUT TO DEVICE_NEIGHBORS VARIABLE"
       set_fact:
-        device_neighbors: "{{ ospf_neighbor_output.stdout[0] | parse_cli_textfsm('~network_automation/ntc-templates/ntc_templates/templates/cisco_ios_show_ip_ospf_neighbor.textfsm') }}"
+        device_neighbors: "{{ ospf_neighbor_output.stdout[0] | parse_cli_textfsm('~./network_automation/ntc-templates/ntc_templates/templates/cisco_ios_show_ip_ospf_neighbor.textfsm') }}"
 
     - name: "TASK 3: PRINT OUTPUT"
       debug:
