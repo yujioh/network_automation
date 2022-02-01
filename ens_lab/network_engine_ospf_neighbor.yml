@@ -1,6 +1,6 @@
 ---
 - name: Use network-engine for Structured Data
-  hosts: localhost
+  hosts: p2
   gather_facts: no
 
   roles:
@@ -13,9 +13,15 @@
       192.168.200.251   0   FULL/  -        00:00:39    192.168.12.1    GigabitEthernet2
 
   tasks:
-    - name: Print the Raw String
-      debug:
-        var: ospf_neighbor_raw
+#    - name: Print the Raw String
+#      debug:
+#        var: ospf_neighbor_raw
+
+    - name: Get OSPF Neighbor
+      ios_command:
+        commands:
+          - "show ip ospf neighbor"
+        register: ospf_neighbor_raw
 
     - name: PARSE THE RAW OUTPUT
       textfsm_parser:
