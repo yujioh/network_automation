@@ -31,5 +31,5 @@
         content: "{{ ospf_neighbor_raw }}"
         name: ospf_neighbor_parsed
 
-    - name: Display the Parsed Data
-      debug: var=ospf_neighbor_parsed
+#    - name: Display the Parsed Data
+#     debug: var=ospf_neighbor_parsed
