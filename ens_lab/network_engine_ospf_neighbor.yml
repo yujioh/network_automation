@@ -21,7 +21,7 @@
       ios_command:
         commands:
           - "show ip ospf neighbor"
-        register: ospf_neighbor_raw
+      register: ospf_neighbor_raw
 
     - name: PARSE THE RAW OUTPUT
       textfsm_parser:
