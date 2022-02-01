@@ -12,7 +12,7 @@
 
     - name: "TASK 2: REGISTER OUTPUT TO DEVICE_NEIGHBORS VARIABLE"
       set_fact:
-        device_neighbors: "{{ lldp_output.stdout[0] | parse_cli_textfsm('~/ntc-templates/templates/cisco_ios_show_lldp_neighbors.textfsm') }}"
+        device_neighbors: "{{ lldp_output.stdout[0] | parse_cli_textfsm('~/network_automation/ntc-templates/templates/cisco_ios_show_lldp_neighbors.textfsm') }}"
 
     - name: "TASK 3: PRINT OUTPUT"
       debug:
