@@ -1,0 +1,31 @@
+- name: Configure SNMP Group and Host
+  cisco.iosxr.iosxr_snmp_server:
+    config:
+      groups:
+      - group: "{{ snmp_v3_group_name }}"
+        version: v3
+        version_option: priv
+ 
+      hosts:
+      - host: "{{ snmp_ipv4_servers }}"
+        version: v3
+        version_option: priv
+        vrf: "{{ mgmt_vrf }}" 
+        loop: "{{ snmp_ipv4_servers }}"
+        when: management_band_type == 'oob'
+      
+      - host: "{{ snmp_ipv4_servers }}"
+        version: v3
+        version_option: priv
+        loop: "{{ snmp_ipv4_servers }}"
+        when: management_band_type == 'inband'
+      
+- name: Configure SNMP Server User
+  cisco.iosxr.iosxr_config:
+    lines:
+      - "snmp-server user {{ snmp_v3_username }} {{ snmp_v3_group_name }} v3 auth sha clear {{ snmp_sha_authentication_key }} priv aes 128 clear {{ snmp_aes_encryption_key }} ipv4 {{ wan20_snmp_ipv4_acl }} "
+
+- name: Configure SNMP Server View
+  cisco.iosxr.iosxr_config:
+    lines:
+      - "snmp-server view {{ snmp_view_name }} iso included"

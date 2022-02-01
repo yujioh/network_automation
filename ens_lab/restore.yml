@@ -1,0 +1,17 @@
+
+---
+- name: restore router configurations
+  hosts: "{{ target }}"
+  connection: network_cli
+  gather_facts: yes
+  become: yes
+  tasks:
+    - name: Upload Restore Config
+      net_put:
+        src: "{{ playbook_dir }}/backup/{{ inventory_hostname }}.config"
+        dest: "flash:{{ inventory_hostname }}.config"
+        protocol: scp
+    - name: Restore Config
+      ios_command:
+        commands:
+          - "config replace bootflash:{{ inventory_hostname }}.config force"

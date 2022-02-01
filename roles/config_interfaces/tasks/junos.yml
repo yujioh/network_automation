@@ -1,0 +1,3 @@
+- name: configure physical interface for junos
+  junos_interfaces:
+    config: "{{ interfaces }}"

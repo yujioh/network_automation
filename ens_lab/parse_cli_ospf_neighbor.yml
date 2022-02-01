@@ -1,0 +1,23 @@
+---
+- name: Test Using parse_cli
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+    ospf_neighbors: |
+      Neighbor ID     Pri   State           Dead Time   Address         Interface
+      192.168.251.2     0   FULL/  -        00:00:36    192.168.23.3    GigabitEthernet3
+      192.168.200.251   0   FULL/  -        00:00:39    192.168.12.1    GigabitEthernet2
+
+  tasks:
+    - name: print unstructured
+      debug:
+        var: ospf_neighbors
+
+    - name: Structure Output
+      set_fact:
+        ospf_neighbor_structured: "{{ ospf_neighbors | parse_cli('parser_spec/ios_show_ip_ospf_neighbor.yml') }}"
+
+    - name: print the data
+      debug:
+        var: ospf_neighbor_structured

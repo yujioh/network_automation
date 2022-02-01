@@ -1,0 +1,50 @@
+---
+l3_interfaces:
+  - name: Loopback0
+    ipv4:
+      - address: 172.16.0.2/32
+  - name: GigabitEthernet1
+    ipv4:
+      - address: 192.168.0.2/30
+  - name: GigabitEthernet2
+    ipv4:
+      - address: 192.168.0.9/30
+  - name: GigabitEthernet3
+    ipv4:
+      - address: 192.168.0.17/30
+interfaces:
+  - name: Loopback0
+    enabled: yes
+  - name: GigabitEthernet1
+    enabled: yes
+  - name: GigabitEthernet2
+    enabled: yes
+  - name: GigabitEthernet3
+    enabled: yes
+static_routes:
+  - prefix: 192.168.23.0
+    mask: 255.255.255.0
+    next_hop: 192.168.12.2
+ospf:
+  interfaces:
+    - name: Loopback0
+      network_type: point-to-point
+      area: 0
+      has_neighbors: no
+    - name: GigabitEthernet2
+      network_type: point-to-point
+      area: 0
+      has_neighbors: yes
+    - name: GigabitEthernet3
+      network_type: point-to-point
+      area: 0
+      has_neighbors: yes
+  process_id: 1
+vrfs:
+  - name: "mgmt-vrf"
+    description: "Management VRF"
+    rd: "65000:1"
+    route_import:
+      - "65000:1"  # optional comment here
+    route_export:
+      - "65000:1"  # optional comment here

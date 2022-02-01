@@ -1,0 +1,49 @@
+---
+l3_interfaces:
+  - name: Loopback0
+    ipv4:
+      - address: 172.16.0.1/32
+  - name: GigabitEthernet0/0/0/0
+    ipv4:
+      - address: 192.168.0.1/30
+  - name: GigabitEthernet0/0/0/1
+    ipv4:
+      - address: 192.168.0.5/30
+  - name: GigabitEthernet0/0/0/2
+    ipv4:
+      - address: 192.168.0.13/30
+  - name: MgmtEth0/RP0/CPU0/0
+    ipv4:
+      - address: 192.168.10.151/24
+interfaces:
+  config:
+  - name: Loopback0
+    description: p1 Lo0
+    enabled: true
+  - name: GigabitEthernet0/0/0/0
+    description: csrv-p2 Gi1
+    enabled: true
+  - name: GigabitEthernet0/0/0/1
+    description: csrv-pe1 Gi1
+    enabled: true
+  - name: GigabitEthernet0/0/0/2
+    description: csrv-pe2 Gi1
+    enabled: true    
+  - name: GigabitEthernet0/0/0/3
+    description: Not in Use
+    enabled: false
+ospf:
+  interfaces:
+    - name: GigabitEthernet0/0/0/0
+      network_type: point-to-point
+      area: 0
+      has_neighbors: yes
+    - name: GigabitEthernet0/0/0/1
+      network_type: point-to-point
+      area: 0
+      has_neighbors: yes
+    - name: GigabitEthernet0/0/0/2
+      network_type: point-to-point
+      area: 0
+      has_neighbors: yes
+  process_id: 1

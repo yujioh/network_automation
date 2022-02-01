@@ -1,0 +1,19 @@
+---
+- name: backup router configurations
+  hosts: routers
+  connection: network_cli
+  gather_facts: yes
+  become: yes
+
+  tasks:
+    - name: Create Backups Directory
+      file:
+        state: directory
+        path: "{{ playbook_dir }}/backup"
+      run_once: true
+      delegate_to: localhost
+
+    - name: Backup configuration
+      net_get:
+        src: running-config
+        dest: "{{ playbook_dir }}/backup/{{ inventory_hostname }}.config"

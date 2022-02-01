@@ -1,0 +1,27 @@
+---
+login_banner: "UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED"
+dns_server:
+  - 192.168.10.20
+ntp_server:
+  - 10.220.1.15
+ntp_acl: 
+  - 192.168.10.10
+snmp_ipv4_servers:
+  - 192.168.10.10
+snmp_v3_group_name:
+  - snmp_group
+snmp_v3_username:
+  - test
+vrfs:
+  - name: "mgmt-vrf"
+    description: "Management VRF"
+    rd: "65000:1"
+    route_import:
+      - "65000:1"  # optional comment here
+    route_export:
+      - "65000:1"  # optional comment here
+snmp:
+  commands:
+    - snmp-server group "{{ snmp_vcommunity ansible RO
+    - snmp-server contact Networking
+    - snmp-server location Lab

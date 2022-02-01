@@ -1,0 +1,9 @@
+---
+- name: show ospf neighbor
+  hosts: p1
+  gather_facts: no
+  
+  tasks:
+    - name: Include show ospf neighbor role
+      include_role:
+        name: "../roles/show_ospf_neighbor"

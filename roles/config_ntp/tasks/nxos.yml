@@ -1,0 +1,9 @@
+- name: Configure NTP
+  cisco.ios.ios_ntp_global:
+    config:
+      servers:
+        - server: "{{ item }}"
+          vrf: "{{ mgmt_vrf }}"
+          key: "{{ ntp_server_key }}"
+          source: "{{ ios_mgmt_intf }}"
+      loop: "{{ ntp_servers }}"

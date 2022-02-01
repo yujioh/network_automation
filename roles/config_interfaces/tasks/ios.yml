@@ -1,0 +1,3 @@
+- name: configure phyiscal interface for ios
+  ios_interfaces:
+    config: "{{ interfaces }}"

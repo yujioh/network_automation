@@ -1,0 +1,27 @@
+---
+- name: Use network-engine for Structured Data
+  hosts: localhost
+  gather_facts: no
+
+  roles:
+    - ansible-network.network-engine
+
+  vars:
+    ospf_neighbor_raw: |
+      Neighbor ID     Pri   State           Dead Time   Address         Interface
+      192.168.251.2     0   FULL/  -        00:00:36    192.168.23.3    GigabitEthernet3
+      192.168.200.251   0   FULL/  -        00:00:39    192.168.12.1    GigabitEthernet2
+
+  tasks:
+    - name: Print the Raw String
+      debug:
+        var: ospf_neighbor_raw
+
+    - name: PARSE THE RAW OUTPUT
+      textfsm_parser:
+        file: "{{ playbook_dir }}/ntc-templates/ntc_templates/templates/cisco_ios_show_ip_ospf_neighbor.textfsm"
+        content: "{{ ospf_neighbor_raw }}"
+        name: ospf_neighbor_parsed
+
+    - name: Display the Parsed Data
+      debug: var=ospf_neighbor_parsed

@@ -1,0 +1,10 @@
+- name: Configure NTP
+  arista.eos.eos_snmp_server:
+    config:  
+
+      servers:
+        - server: "{{ item }}"
+          vrf: "{{ mgmt_vrf }}"
+          key_id: "{{ "ntp_server_key }}""
+          local_interface: "{{ eos_mgmt_intf }}"
+      loop: "{{ ntp_ipv4_servers }}"

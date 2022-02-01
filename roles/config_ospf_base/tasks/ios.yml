@@ -1,0 +1,77 @@
+---
+- name: configure router interfaces and routes
+  hosts: cisco_csr
+  connection: network_cli
+  gather_facts: no
+  become: yes
+  tasks:
+
+    - name: Configuration L3 Interfaces
+      ios_l3_interfaces:
+        config: "{{ l3_interfaces | default([]) }}"
+        state: replaced
+      notify: "save ios"
+
+    - name: Enable the Interfaces
+      ios_interfaces:
+        config: "{{ interfaces | default([]) }}"
+        state: replaced
+      notify: "save ios"
+
+    - name: Remove Static Routes
+      ios_static_route:
+        prefix: "{{ item.prefix }}"
+        mask: "{{ item.mask }}"
+        next_hop: "{{ item.next_hop }}"
+        state: absent
+      loop: "{{ static_routes | default([]) }}"
+      notify: "save ios"
+
+    - name: Enable OSPF
+      ios_config:
+        lines:
+          - "ip ospf network {{ item.network_type }}"
+          - "ip ospf {{ ospf.process_id }} area {{ item.area }}"
+        parents: "interface {{ item.name }}"
+      loop: "{{ ospf.interfaces }}"
+      notify: "save ios"
+
+  handlers:
+    - name: save ios
+      ios_command:
+        commands: "write mem"
+      when: not ansible_check_mode
+- name: Run Test Cases
+  hosts: cisco_csr
+  connection: network_cli
+  gather_facts: no
+  become: yes
+  tasks:
+
+    - name: Wait for 5 Seconds
+      pause:
+        seconds: 5
+
+    - name: Collect OSPF neighbors
+      ios_command:
+        commands:
+          - "show ip ospf neighbor {{ item.name }}"
+      loop: "{{ ospf.interfaces }}"
+      when: item.has_neighbors
+      register: ospf_results
+
+    - name: Collect IP Routes
+      ios_command:
+        commands:
+          - "show ip route ospf"
+      register: ospf_route_results
+
+    - name: Validate Neighbors
+      assert:
+        that:  item.stdout[0] is search("FULL")
+      loop: "{{ ospf_results.results }}"
+      when: item.skipped is not true
+
+    - name: Validate OSPF Routes
+      assert:
+        that:  ospf_route_results.stdout is regex("O\s.*\[110")
