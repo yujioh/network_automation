@@ -1,6 +1,6 @@
 ---
 - name: Get LLDP info
-  hosts: p2
+  hosts: yuji_lab
   gather_facts: no
 
   tasks:
