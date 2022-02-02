@@ -1,26 +1,22 @@
----
-- name: Get ospf Neighbor as Structured Data
+- name: Get ospf Neighbor Output
+  eos_command:
+    commands:
+      - show ospf neighbors
+  register: ospf_output
 
-  tasks:
-    - name: Get ospf Neighbor Output
-      eos_command:
-        commands:
-          - show ospf neighbors
-      register: ospf_output
+- name: Parse Output to Variable
+  set_fact:
+    device_neighbors: "{{ ospf_output.stdout[0] | parse_cli_textfsm('/home/yuji/network_automation/templates/textfsm-templates/arista_eos_show_ospf_neighbors.textfsm') }}"
 
-    - name: Parse Output to Variable
-      set_fact:
-        device_neighbors: "{{ ospf_output.stdout[0] | parse_cli_textfsm('/home/yuji/network_automation/templates/textfsm-templates/arista_eos_show_ospf_neighbors.textfsm') }}"
+- name: Print Variable 
+  debug:
+    msg: "{{ device_neighbors }}"
 
-    - name: Print Variable 
-      debug:
-        msg: "{{ device_neighbors }}"
-
-    - name: Output to File
-      
-    - name: Print Neighbor
-      debug:
-        msg: "{{ item['LOCAL_INTERFACE'] }}: {{ item['NEIGHBOR'] }}"
-      loop: "{{ device_neighbors }}"
-      loop_control:
-        label: "{{ item['LOCAL_INTERFACE'] }}"
+- name: Output to File
+  
+- name: Print Neighbor
+  debug:
+    msg: "{{ item['LOCAL_INTERFACE'] }}: {{ item['NEIGHBOR'] }}"
+  loop: "{{ device_neighbors }}"
+  loop_control:
+    label: "{{ item['LOCAL_INTERFACE'] }}"
