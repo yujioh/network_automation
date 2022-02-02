@@ -6,7 +6,7 @@
 
 - name: Parse Output to Variable
   set_fact:
-    device_neighbors: "{{ ospf_output.stdout[0] | parse_cli_textfsm('/home/yuji/network_automation/templates/textfsm-templates/cisco_iosxr_show_ospf_neighbors.textfsm') }}"
+    device_neighbors: "{{ ospf_output.stdout[0] | parse_cli_textfsm('/home/yuji/network_automation/templates/textfsm-templates/cisco_iosxr_show_ospf_neighbor.textfsm') }}"
 
 - name: Print Variable 
   debug:
