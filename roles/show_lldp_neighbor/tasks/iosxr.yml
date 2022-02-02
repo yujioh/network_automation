@@ -1,26 +1,22 @@
----
-- name: Get LLDP Neighbor as Structured Data
+- name: Get LLDP Neighbor Output
+  iosxr_command:
+    commands:
+      - show lldp neighbors
+  register: lldp_output
 
-  tasks:
-    - name: Get LLDP Neighbor Output
-      iosxr_command:
-        commands:
-          - show lldp neighbors
-      register: lldp_output
+- name: Parse Output to Variable
+  set_fact:
+    device_neighbors: "{{ lldp_output.stdout[0] | parse_cli_textfsm('/home/yuji/network_automation/templates/ntc-templates/cisco_iosxr_show_lldp_neighbors.textfsm') }}"
 
-    - name: Parse Output to Variable
-      set_fact:
-        device_neighbors: "{{ lldp_output.stdout[0] | parse_cli_textfsm('/home/yuji/network_automation/templates/ntc-templates/cisco_iosxr_show_lldp_neighbors.textfsm') }}"
+- name: Print Variable 
+  debug:
+    msg: "{{ device_neighbors }}"
 
-    - name: Print Variable 
-      debug:
-        msg: "{{ device_neighbors }}"
-
-    - name: Output to File
-      
-    - name: Print Neighbor
-      debug:
-        msg: "{{ item['LOCAL_INTERFACE'] }}: {{ item['NEIGHBOR'] }}"
-      loop: "{{ device_neighbors }}"
-      loop_control:
-        label: "{{ item['LOCAL_INTERFACE'] }}"
+- name: Output to File
+  
+- name: Print Neighbor
+  debug:
+    msg: "{{ item['LOCAL_INTERFACE'] }}: {{ item['NEIGHBOR'] }}"
+  loop: "{{ device_neighbors }}"
+  loop_control:
+    label: "{{ item['LOCAL_INTERFACE'] }}"
