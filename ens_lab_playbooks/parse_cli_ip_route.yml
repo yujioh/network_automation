@@ -32,7 +32,7 @@
 
     - name: Structure Output
       set_fact:
-        ip_routes: "{{ ip_route_raw | parse_cli_textfsm('ntc-templates/ntc_templates/templates/cisco_ios_show_ip_route.textfsm') }}"
+        ip_routes: "{{ ip_route_raw | parse_cli_textfsm('textfsm-templates/ntc_templates/templates/cisco_ios_show_ip_route.textfsm') }}"
 
     - name: print the data
       debug:

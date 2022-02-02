@@ -6,7 +6,7 @@
 
 - name: Parse Output to Variable
   set_fact:
-    device_neighbors: "{{ lldp_output.stdout[0] | parse_cli_textfsm('/home/yuji/network_automation/templates/ntc-templates/arista_eos_show_lldp_neighbors.textfsm') }}"
+    device_neighbors: "{{ lldp_output.stdout[0] | parse_cli_textfsm('/home/yuji/network_automation/templates/textfsm-templates/arista_eos_show_lldp_neighbors.textfsm') }}"
 
 - name: Print Variable 
   debug:

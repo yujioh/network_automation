@@ -91,7 +91,7 @@ Extended IP access list test2
 Extended IP access list ios_show_ip_acl
     10 permit 53 any any log (123456 matches)
     20 permit ip any any log (23 matches)
-Extended IP access list ntc-templates
+Extended IP access list textfsm-templates
     10 permit icmp host 10.10.10.10 any echo-reply
     20 permit icmp host 10.10.10.10 any administratively-prohibited (123456 matches)
     30 permit icmp host 10.10.10.10 any unreachable log

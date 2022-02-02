@@ -1,4 +1,4 @@
-[kvanlang@steffi upgrade-support]$ cat ../ntc-templates-test/lib/test-bgp-sum-family.raw
+[kvanlang@steffi upgrade-support]$ cat ../textfsm-templates-test/lib/test-bgp-sum-family.raw
 A:SRHERE01# show router "Base" bgp summary family ipv4
 ===============================================================================
  BGP Router ID:192.0.2.11   AS:6848        Local AS:65535
