@@ -1,7 +1,7 @@
 - name: Get ospf Neighbor Output
   eos_command:
     commands:
-      - show ospf neighbors
+      - show ip ospf neighbor
   register: ospf_output
 
 - name: Parse Output to Variable
