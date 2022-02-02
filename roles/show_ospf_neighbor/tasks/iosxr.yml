@@ -1,21 +1,26 @@
 ---
-- name: Collect OSPF neighbors
-  ios_command:
-    commands:
-      - "show ip ospf neighbor"
-    register: ospf_neighbor_raw
+- name: Get ospf neighbor as structured data
+
+  tasks:
+    - name: Get ospf Neighbor Output
+      iosxr_command:
+        commands:
+          - show ospf neighbors
+      register: ospf_output
+
+    - name: Parse Output to Variable
+      set_fact:
+        device_neighbors: "{{ ospf_output.stdout[0] | parse_cli_textfsm('/home/yuji/network_automation/templates/ntc-templates/cisco_iosxr_show_ospf_neighbors.textfsm') }}"
+
+    - name: Print Variable 
+      debug:
+        msg: "{{ device_neighbors }}"
+
+    - name: Output to File
       
-- name: Print the Raw String
-  debug:
-    var: ospf_neighbor_raw
-
-- name: PARSE THE IOS OUTPUT
-  import_role:
-    name: ansible-network.network-engine
-      textfsm_parser:
-        file: "{{ playbook_dir }}/ntc-templates/ntc_templates/templates/cisco_iosxr_show_ip_ospf_neighbor.textfsm"
-        content: "{{ ospf_neighbor_raw }}"
-        name: ospf_neighbor_parsed
-
-- name: Display the Parsed Data
-  debug: var=ospf_neighbor_parsed
+    - name: Print Neighbor
+      debug:
+        msg: "{{ item['LOCAL_INTERFACE'] }}: {{ item['NEIGHBOR'] }}"
+      loop: "{{ device_neighbors }}"
+      loop_control:
+        label: "{{ item['LOCAL_INTERFACE'] }}"
