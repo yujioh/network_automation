@@ -4,21 +4,23 @@
   gather_facts: no
 
   tasks:
-    - name: "TASK 1: GET COMMAND OUTPUT"
+    - name: Get LLDP Neighbor Output
       ios_command:
         commands:
           - show lldp neighbors
       register: lldp_output
 
-    - name: "TASK 2: REGISTER OUTPUT TO DEVICE_NEIGHBORS VARIABLE"
+    - name: Parse Output to Variable
       set_fact:
-        device_neighbors: "{{ lldp_output.stdout[0] | parse_cli_textfsm('/home/yuji/network_automation/ntc-templates/templates/cisco_ios_show_lldp_neighbors.textfsm') }}"
+        device_neighbors: "{{ lldp_output.stdout[0] | parse_cli_textfsm('/home/yuji/network_automation/templates/ntc-templates/cisco_ios_show_lldp_neighbors.textfsm') }}"
 
-    - name: "TASK 3: PRINT OUTPUT"
+    - name: Print Variable 
       debug:
         msg: "{{ device_neighbors }}"
 
-    - name: "TASK 4: PRINT NEIGHBORS"
+    - name: Output to File
+      
+    - name: Print Neighbor
       debug:
         msg: "{{ item['LOCAL_INTERFACE'] }}: {{ item['NEIGHBOR'] }}"
       loop: "{{ device_neighbors }}"

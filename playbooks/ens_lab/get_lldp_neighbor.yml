@@ -1,0 +1,9 @@
+---
+- name: Use network-engine for Structured Data
+  hosts: p2
+  gather_facts: no
+
+  tasks:
+    - name: Include show ospf neighbor role
+      include_role:
+        name: "../roles/show_lldp_neighbor"

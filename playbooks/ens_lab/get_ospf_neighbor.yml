@@ -3,9 +3,6 @@
   hosts: p2
   gather_facts: no
 
-  roles:
-    - ansible-network.network-engine
-
 #  vars:
 #    ospf_neighbor_raw: |
 #      Neighbor ID     Pri   State           Dead Time   Address         Interface
@@ -22,23 +19,9 @@
 
     - name: "TASK 2: REGISTER OUTPUT TO DEVICE_NEIGHBORS VARIABLE"
       set_fact:
-        device_neighbors: "{{ ospf_neighbor_output.stdout[0] | parse_cli_textfsm('~/network_automation/ntc-templates/templates/cisco_ios_show_ip_ospf_neighbor.textfsm') }}"
+        device_neighbors: "{{ ospf_neighbor_output.stdout[0] | parse_cli_textfsm('/home/yuji/network_automation/templates/ntc-templates/cisco_ios_show_ip_ospf_neighbor.textfsm') }}"
 
     - name: "TASK 3: PRINT OUTPUT"
       debug:
         msg: "{{ device_neighbors }}"
 
-
-#    - name: Print the Raw String
-#      debug:
-#        var: ospf_neighbor_output
-
-
-#    - name: PARSE THE RAW OUTPUT
-#      textfsm_parser:
-#        file: "{{ playbook_dir }}/ntc-templates/ntc_templates/templates/cisco_ios_show_ip_ospf_neighbor.textfsm"
-#        content: "{{ ospf_neighbor_raw }}"
-#        name: ospf_neighbor_parsed
-
-#    - name: Display the Parsed Data
-#     debug: var=ospf_neighbor_parsed
