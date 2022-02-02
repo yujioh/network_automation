@@ -11,9 +11,7 @@
 - name: Print Variable 
   debug:
     msg: "{{ device_neighbors }}"
-
-- name: Output to File
-  
+ 
 - name: Print Neighbor
   debug:
     msg: "{{ item['LOCAL_INTERFACE'] }}: {{ item['NEIGHBOR'] }}"
