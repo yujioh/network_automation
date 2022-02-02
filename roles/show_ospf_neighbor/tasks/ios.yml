@@ -14,7 +14,7 @@
 
 - name: Print Neighbor
   debug:
-    msg: "{{ item['INTERFACE'] }}: {{ item['ADDRESS'] }}"
+    msg: "{{ item['INTERFACE'] }}: Nei {{ item['NEIGHBOR_ID'] }} Intf:{{ item['ADDRESS'] }} "
   loop: "{{ device_neighbors }}"
   loop_control:
     label: "{{ item['INTERFACE'] }}"
