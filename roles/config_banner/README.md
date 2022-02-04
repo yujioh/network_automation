@@ -17,7 +17,7 @@ To use this multi-platform network automation banner role:
 ```
 ---
 - name: set router banners
-  hosts: routers
+  hosts: yuji_lab
   gather_facts: no
 
   tasks:

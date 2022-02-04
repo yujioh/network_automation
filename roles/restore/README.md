@@ -15,7 +15,7 @@ To use this multi-platform network automation restore role:
 ```
 ---
 - name: restore router configurations
-  hosts: routers
+  hosts: yuji_lab
   gather_facts: no
 
   tasks:

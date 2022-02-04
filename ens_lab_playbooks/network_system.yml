@@ -1,6 +1,6 @@
 ---
 - name: configure system properites
-  hosts: routers
+  hosts: yuji_lab
   gather_facts: no
 
   tasks:
