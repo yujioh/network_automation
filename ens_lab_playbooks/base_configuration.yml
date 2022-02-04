@@ -1,6 +1,6 @@
 ---
 - name: Configure Device Base Configurations
-  hosts: routers
+  hosts: yuji_lab
   connection: network_cli
   gather_facts: no
   become: yes

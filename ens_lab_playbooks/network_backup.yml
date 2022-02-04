@@ -1,6 +1,6 @@
 ---
 - name: retrieve network configurations
-  hosts: network
+  hosts: yuji_lab
   gather_facts: no
 
   tasks:
