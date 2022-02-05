@@ -1,7 +1,7 @@
 - name: Get BGP VPNV4 Summary
   ios_command:
     commands:
-      - show ip bgp vpnv4 unicast sum
+      - show ip bgp vpnv4 all sum
   register: bgp_vpnv4_summary_output
 
 - name: Parse Output to Variable
