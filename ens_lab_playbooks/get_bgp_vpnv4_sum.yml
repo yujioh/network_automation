@@ -1,6 +1,6 @@
 ---
 - name: Get BGP VPNV4 Summary
-  hosts: na_gcore
+  hosts: iosxr
   gather_facts: no
 
   tasks:
