@@ -1,0 +1,20 @@
+- name: Get BGP VPNV4 Summary
+  ios_command:
+    commands:
+      - show ip bgp vpnv4 unicast sum
+  register: bgp_vpnv4_summary_output
+
+- name: Parse Output to Variable
+  set_fact:
+    vpnv4_neighbors: "{{ bgp_vpnv4_summary_output.stdout[0] | parse_cli_textfsm('/home/yuji/network_automation/templates/textfsm-templates/cisco_ios_show_ip_bgp_summary.textfsm') }}"
+
+- name: Print Variable 
+  debug:
+    msg: "{{ vpnv4_neighbors }}"
+
+- name: Print Neighbor
+  debug:
+    msg: "Neighbor: {{ item['BGP_NEIGH'] }} ASN: {{ item['NEIGH_AS'] }} State:  {{ item['UP_DOWN'] }} State/Prefix Rcv:{{ item['STATE_PFXRCD'] }} "
+  loop: "{{ BGP_NEIGH }}"
+  loop_control:
+    label: "{{ item['BGP_NEIGH'] }}"

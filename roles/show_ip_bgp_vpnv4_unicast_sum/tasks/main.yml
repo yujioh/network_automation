@@ -1,0 +1,2 @@
+- name: show bgp vpnv4 unicast summary
+  include_tasks: "{{ ansible_network_os }}.yml"
