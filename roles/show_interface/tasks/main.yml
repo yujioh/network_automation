@@ -5,6 +5,9 @@
       name: ansible.netcommon.ntc_templates
     set_fact: interfaces
 
+- name: Copy output to file
+  local_action: copy content={{ interfaces }} dest=/home/yuji/network_automation/output/interfaces
+
 - name: Print Variable 
   debug:
     msg: "{{ interfaces }}"
