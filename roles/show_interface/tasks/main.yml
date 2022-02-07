@@ -1,0 +1,10 @@
+- name: Run Command and parse with ntc_templates
+  ansible.utils.cli_parse:
+    command: show interface
+    parser:
+      name: ansible.netcommon.ntc_templates
+    set_fact: interfaces
+
+- name: Print Variable 
+  debug:
+    msg: "{{ interfaces }}"
