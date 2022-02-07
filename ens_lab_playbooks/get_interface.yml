@@ -1,0 +1,9 @@
+---
+- name: Get Interface info
+  hosts: yuji_lab
+  gather_facts: no
+
+  tasks:
+    - name: Include show interface role
+      include_role:
+        name: "../roles/show_interface"
