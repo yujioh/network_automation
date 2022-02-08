@@ -11,7 +11,7 @@
     datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
 
 - name: Copy output to file
-  local_action: copy content={{ interfaces }} dest=/home/yuji/network_automation/output/{{ datetime }}-{{ inventory_hostname }}-interfaces
+  local_action: copy content={{ interfaces }} dest=/home/yuji/network_automation/output/{{ datetime }}{{ hostname }}.interfaces
 
 #- name: Print Variable 
 #  debug:
