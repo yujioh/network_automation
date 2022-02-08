@@ -1,6 +1,6 @@
 # This task will backup the configuration
 - name: backup cisco ios configuration
-  cisco.ios.config:
+  cisco.iosxr.config:
     backup: true
     backup_options:
       dir_path: /home/yuji/network_automation/output/backup/{{ datetime }}

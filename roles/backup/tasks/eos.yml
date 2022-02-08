@@ -2,6 +2,6 @@
   arista.eos.eos_config:
     backup: true
     backup_options:
-      dir_path: /tmp/
+      dir_path: /home/yuji/network_automation/output/backup/{{ datetime }}
       filename: "{{ inventory_hostname }}"      
   register: config_output
