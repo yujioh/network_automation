@@ -8,10 +8,10 @@
     parser:
       name: ansible.netcommon.ntc_templates
     set_fact: interfaces
-#  local_action: copy content={{ interfaces }} dest=/home/yuji/network_automation/output/{{ datetime }}-{{inventory_hostname }}-interfaces
+  local_action: copy content={{ interfaces }} dest=/home/yuji/network_automation/output/{{ datetime }}-{{inventory_hostname }}-interfaces
 
-- name: Copy output to file
-  local_action: copy content={{ interfaces }} dest=/home/yuji/network_automation/output/ {{ datetime }}-{{inventory_hostname }}-interfaces
+#- name: Copy output to file
+#  local_action: copy content={{ interfaces }} dest=/home/yuji/network_automation/output/ {{ datetime }}-{{inventory_hostname }}-interfaces
 
 #- name: Print Variable 
 #  debug:
