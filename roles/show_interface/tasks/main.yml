@@ -2,9 +2,9 @@
 # set_fact:
 #    datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
 
-- name: Create file
-  file: /home/yuji/network_automation/output/"{{ datetime }}{{inventory_hostname }}"-interfaces
-  state: touch
+#- name: Create file
+#  file: /home/yuji/network_automation/output/"{{ datetime }}{{inventory_hostname }}"-interfaces
+#  state: touch
 
 - name: Run Command and parse with ntc_templates
   ansible.utils.cli_parse:
