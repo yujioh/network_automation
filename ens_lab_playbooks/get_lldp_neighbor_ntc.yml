@@ -1,0 +1,9 @@
+---
+- name: Get LLDP info
+  hosts: yuji_lab
+  gather_facts: no
+
+  tasks:
+    - name: Include show lldp neighbor role
+      include_role:
+        name: "../roles/show_lldp_neighbor_ntc"
