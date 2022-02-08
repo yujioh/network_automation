@@ -12,10 +12,9 @@
   run_once: true
 
 - name: ensure file exists
-  copy:
-    content: ""
-    dest: /home/yuji/network_automation/output/interfaces/{{ datetime }}
-    force: no
+  file:
+    path: /home/yuji/network_automation/output/interfaces/{{ datetime }}
+    state: touch
           
 - name: Run Command and parse with ntc_templates
   ansible.utils.cli_parse:
