@@ -4,6 +4,17 @@
   gather_facts: no
 
   tasks:
+    - name: create time stamp for play
+      set_fact:
+        datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
+
     - name: Include show interface role
       include_role:
         name: "../roles/show_interface"
+
+    - name: Copy output to file
+      local_action: copy content={{ interfaces }} dest=/home/yuji/network_automation/output/ {{ datetime }}-{{inventory_hostname }}-interfaces
+
+#- name: Print Variable 
+#  debug:
+#    msg: "{{ interfaces }}"
