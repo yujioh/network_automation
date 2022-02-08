@@ -8,7 +8,7 @@
     command: show interface
     parser:
       name: ansible.utils.textfsm
-      template_path: /home/yuji/network_automation/templates/textfsm-templates/cisco_iosxr_show_interfaces.textfsm
+      template_path: /home/yuji/network_automation/templates/textfsm_templates/cisco_iosxr_show_interfaces.textfsm
     set_fact: interfaces
 
 - name: Print Variable 
