@@ -18,4 +18,4 @@
   local_action: 
     module: copy 
     content: "{{ interfaces }}" 
-    dest: /home/yuji/network_automation/output/{{ datetime }}{{ inventory_hostname }}-interfaces
+    dest: /home/yuji/network_automation/output/interfaces/{{ datetime }}{{ inventory_hostname }}-interfaces
