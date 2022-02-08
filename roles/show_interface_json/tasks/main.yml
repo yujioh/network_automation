@@ -26,7 +26,7 @@
   ansible.utils.cli_parse:
     command: show interface | json
     parser:
-      name: ansible.netcommon.json
+      name: ansible.utils.json
     set_fact: interfaces
 
 
