@@ -6,6 +6,11 @@
 #  file: /home/yuji/network_automation/output/"{{ datetime }}{{inventory_hostname }}"-interfaces
 #  state: touch
 
+- name: Get Datetime
+  set_fact:
+    datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
+  run_once: true
+      
 - name: Run Command and parse with ntc_templates
   ansible.utils.cli_parse:
     command: show interface
@@ -18,4 +23,4 @@
   local_action: 
     module: copy 
     content: "{{ interfaces }}" 
-    dest: /home/yuji/network_automation/output/interfaces/{{ datetime }}-{{ inventory_hostname }}-interfaces
+    dest: /home/yuji/network_automation/output/interfaces/{{ datetime }}/{{ inventory_hostname }}-interfaces
