@@ -1,2 +1,3 @@
-- name: show lldp neighbor
+- name: show ospf
+ neighbor
   include_tasks: "{{ ansible_network_os }}.yml"

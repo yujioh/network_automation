@@ -1,0 +1,22 @@
+- name: ensure file exists
+  file:
+    path: /home/yuji/network_automation/output/interfaces_textfsm/{{ datetime }}/{{ inventory_hostname }}_interfaces
+    state: touch
+
+- name: Run Command and parse with textfsm
+  ansible.utils.cli_parse:
+    command: show interface
+    parser:
+      name: ansible.utils.textfsm
+      template_path: /home/yuji/network_automation/templates/textfsm-templates/cisco_ios_show_interfaces.textfsm
+    set_fact: interfaces
+
+- name: Print Variable 
+  debug:
+    msg: "{{ interfaces }}"
+
+- name: Copy output to file
+  local_action: 
+    module: copy 
+    content: "{{ interfaces | to_nice_json }}" 
+    dest: /home/yuji/network_automation/output/interfaces_textfsm/{{ datetime }}/{{ inventory_hostname }}_interfaces
