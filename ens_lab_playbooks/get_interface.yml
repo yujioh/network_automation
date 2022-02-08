@@ -3,7 +3,7 @@
   hosts: yuji_lab
   gather_facts: no
 
-    - name: Get Datetime
+    - name: Get datetime
       include_role:
         name: "../roles/get_datetime"
       run_once: true
