@@ -1,15 +1,12 @@
 ---
-- name: Get Datetime
-  hosts: localhost
-  gather_facts: no
-  tasks:
-    - name: Get Datetime
-      include_role:
-        name: "../roles/get_datetime"
-
 - name: Get Interface info
   hosts: yuji_lab
   gather_facts: no
+
+   - name: Get Datetime
+      include_role:
+        name: "../roles/get_datetime"
+    run_once: true
 
     - name: Include show interface role
       include_role:
