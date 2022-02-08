@@ -5,29 +5,28 @@
 
 - name: ensure directory exists
   file:
-    path: /home/yuji/network_automation/output/interfaces_ntc/{{ datetime }}
+    path: /home/yuji/network_automation/output/interfaces_textfsm/{{ datetime }}
     state: directory
   run_once: true
     
 - name: ensure file exists
   file:
-    path: /home/yuji/network_automation/output/interfaces_ntc/{{ datetime }}/{{ inventory_hostname }}_interfaces
+    path: /home/yuji/network_automation/output/interfaces_textfsm/{{ datetime }}/{{ inventory_hostname }}_interfaces
     state: touch
 
-- name: Run Command and parse with ntc_templates
+- name: Run Command and parse with textfsm
   ansible.utils.cli_parse:
     command: show interface
     parser:
-      name: ansible.netcommon.ntc_templates
+      name: ansible.utils.textfsm
     set_fact: interfaces
 
 - name: Print Variable 
   debug:
     msg: "{{ interfaces }}"
-
+    
 - name: Copy output to file
   local_action: 
     module: copy 
     content: "{{ interfaces | to_nice_json }}" 
-    dest: /home/yuji/network_automation/output/interfaces_ntc/{{ datetime }}/{{ inventory_hostname }}_interfaces
-
+    dest: /home/yuji/network_automation/output/interfaces_textfsm/{{ datetime }}/{{ inventory_hostname }}_interfaces

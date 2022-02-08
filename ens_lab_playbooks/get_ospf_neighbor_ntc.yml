@@ -1,0 +1,9 @@
+---
+- name: Get ospf info
+  hosts: yuji_lab
+  gather_facts: no
+
+  tasks:
+    - name: Include show ospf neighbor role
+      include_role:
+        name: "../roles/show_ospf_neighbor_ntc"

@@ -5,25 +5,25 @@
 
 - name: ensure directory exists
   file:
-    path: /home/yuji/network_automation/output/lldp_neighbor_ntc/{{ datetime }}
+    path: /home/yuji/network_automation/output/ospf_neighbor_ntc/{{ datetime }}
     state: directory
   run_once: true
     
 - name: ensure file exists
   file:
-    path: /home/yuji/network_automation/output/lldp_neighbor_ntc/{{ datetime }}/{{ inventory_hostname }}_lldp_neighbor
+    path: /home/yuji/network_automation/output/ospf_neighbor_ntc/{{ datetime }}/{{ inventory_hostname }}_ospf_neighbor
     state: touch
 
 - name: Run Command and parse with ntc_templates
   ansible.utils.cli_parse:
-    command: show lldp neighbor
+    command: show ospf neighbor
     parser:
       name: ansible.netcommon.ntc_templates
-    set_fact: lldp_neighbor
+    set_fact: ospf_neighbor
 
 
 - name: Copy output to file
   local_action: 
     module: copy 
-    content: "{{ lldp_neighbor | to_nice_json }}" 
-    dest: /home/yuji/network_automation/output/lldp_neighbor_ntc/{{ datetime }}/{{ inventory_hostname }}_lldp_neighbor
+    content: "{{ ospf_neighbor | to_nice_json }}" 
+    dest: /home/yuji/network_automation/output/ospf_neighbor_ntc/{{ datetime }}/{{ inventory_hostname }}_ospf_neighbor

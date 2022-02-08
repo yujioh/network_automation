@@ -6,8 +6,4 @@
   tasks:
     - name: Include show interface role
       include_role:
-        name: "../roles/show_interface_json"
-
-#- name: Print Variable 
-#  debug:
-#    msg: "{{ interfaces }}"
+        name: "../roles/show_interface_textfsm"
