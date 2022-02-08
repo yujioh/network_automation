@@ -1,13 +1,2 @@
-- name: Get Datetime
-  set_fact:
-    datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
-  run_once: true
-
-- name: ensure directory exists
-  file:
-    path: /home/yuji/network_automation/output/interfaces_textfsm/{{ datetime }}
-    state: directory
-  run_once: true
-    
 - name: show interface
   include_tasks: "{{ ansible_network_os }}.yml"

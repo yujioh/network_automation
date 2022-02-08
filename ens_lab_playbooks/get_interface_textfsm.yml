@@ -4,6 +4,23 @@
   gather_facts: no
 
   tasks:
+    - name: Get Datetime
+      set_fact:
+        datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
+      run_once: true
+
+    - name: ensure directory exists
+      file:
+        path: /home/yuji/network_automation/output/interfaces_textfsm/{{ datetime }}
+        state: directory
+      run_once: true
+    
     - name: Include show interface role
       include_role:
         name: "../roles/show_interface_textfsm"
+
+    - name: Copy output to file
+      local_action: 
+        module: copy 
+        content: "{{ interfaces | to_nice_json }}" 
+        dest: /home/yuji/network_automation/output/interfaces_textfsm/{{ datetime }}/{{ inventory_hostname }}_interfaces
