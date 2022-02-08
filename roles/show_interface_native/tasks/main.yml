@@ -13,13 +13,13 @@
 
 - name: ensure directory exists
   file:
-    path: /home/yuji/network_automation/output/interfaces/{{ datetime }}
+    path: /home/yuji/network_automation/output/interfaces-native/{{ datetime }}
     state: directory
   run_once: true
     
 - name: ensure file exists
   file:
-    path: /home/yuji/network_automation/output/interfaces/{{ datetime }}/{{ inventory_hostname }}-interfaces
+    path: /home/yuji/network_automation/output/interfaces-native/{{ datetime }}/{{ inventory_hostname }}-interfaces
     state: touch
 
 - name: Run Command and parse with native parser
@@ -34,4 +34,4 @@
   local_action: 
     module: copy 
     content: "{{ interfaces }}" 
-    dest: /home/yuji/network_automation/output/interfaces/{{ datetime }}/{{ inventory_hostname }}-interfaces
+    dest: /home/yuji/network_automation/output/interfaces-native/{{ datetime }}/{{ inventory_hostname }}-interfaces
