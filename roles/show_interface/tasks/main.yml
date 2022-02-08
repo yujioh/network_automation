@@ -15,7 +15,7 @@
 
 
 - name: Copy output to file
-    local_action: 
+  local_action: 
     module: copy 
     content: "{{ interfaces }}" 
     dest: /home/yuji/network_automation/output/"{{ datetime }}{{ inventory_hostname }}"-interfaces
