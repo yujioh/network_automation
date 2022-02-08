@@ -13,16 +13,15 @@
 
 - name: ensure directory exists
   file:
-    path: /home/yuji/network_automation/output/interfaces
+    path: /home/yuji/network_automation/output/interfaces/{{ datetime }}
     state: directory
   run_once: true
     
 - name: ensure file exists
   file:
-    path: /home/yuji/network_automation/output/interfaces/{{ datetime }}
+    path: /home/yuji/network_automation/output/interfaces/{{ datetime }}/{{ inventory_hostname }}-interfaces
     state: touch
-  run_once: true
-  
+
 - name: Run Command and parse with ntc_templates
   ansible.utils.cli_parse:
     command: show interface
