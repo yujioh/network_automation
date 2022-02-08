@@ -11,6 +11,11 @@
     datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
   run_once: true
 
+- name: ensure directory exists
+  file:
+    path: /home/yuji/network_automation/output/interfaces
+    state: directory
+    
 - name: ensure file exists
   file:
     path: /home/yuji/network_automation/output/interfaces/{{ datetime }}
