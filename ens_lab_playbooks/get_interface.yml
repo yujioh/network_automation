@@ -4,11 +4,10 @@
   gather_facts: no
 
   tasks:
-    - name: create time stamp for play
-      set_fact:
-        datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
-      run_once: true
-      
+    - name: Get Datetime
+       include_role:
+        name: "../roles/get_datetime"
+
     - name: Include show interface role
       include_role:
         name: "../roles/show_interface"
