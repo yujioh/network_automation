@@ -27,6 +27,7 @@
     command: show interface
     parser:
       name: ansible.netcommon.native
+      template_path: /home/yuji/network_automation/templates/native-templates
     set_fact: interfaces
 
 
