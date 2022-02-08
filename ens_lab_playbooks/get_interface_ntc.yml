@@ -6,7 +6,7 @@
   tasks:
     - name: Include show interface role
       include_role:
-        name: "../roles/show_interface"
+        name: "../roles/show_interface_ntc"
 
 #- name: Print Variable 
 #  debug:
