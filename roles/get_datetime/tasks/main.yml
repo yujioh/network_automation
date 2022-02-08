@@ -1,0 +1,4 @@
+- name: create time stamp for play
+  set_fact:
+    datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
+

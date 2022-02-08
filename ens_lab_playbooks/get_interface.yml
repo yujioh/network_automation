@@ -4,6 +4,10 @@
   gather_facts: no
 
   tasks:
+    - name: Get Datetime
+      include_role:
+        name: "../roles/get_datetime"
+        
     - name: Include show interface role
       include_role:
         name: "../roles/show_interface"
