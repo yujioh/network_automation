@@ -3,7 +3,7 @@
 #    datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
 
 - name: Create file
-  file: "/home/yuji/network_automation/output/{{ datetime }}{{inventory_hostname }}interfaces"
+  file: "/home/yuji/network_automation/output/"{{ datetime }}{{inventory_hostname }}"-interfaces"
   state: touch
 
 - name: Run Command and parse with ntc_templates
@@ -15,4 +15,4 @@
 
 
 - name: Copy output to file
-    local_action: copy content={{ interfaces }} dest=/home/yuji/network_automation/output/{{ datetime }}{{ inventory_hostname }}interfaces
+    local_action: copy content="{{ interfaces }}"" dest=/home/yuji/network_automation/output/"{{ datetime }}{{ inventory_hostname }}"-interfaces
