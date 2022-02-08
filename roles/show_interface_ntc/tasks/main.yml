@@ -13,13 +13,13 @@
 
 - name: ensure directory exists
   file:
-    path: /home/yuji/network_automation/output/interfaces-ntc/{{ datetime }}
+    path: /home/yuji/network_automation/output/interfaces_ntc/{{ datetime }}
     state: directory
   run_once: true
     
 - name: ensure file exists
   file:
-    path: /home/yuji/network_automation/output/interfaces-ntc/{{ datetime }}/{{ inventory_hostname }}-interfaces
+    path: /home/yuji/network_automation/output/interfaces_ntc/{{ datetime }}/{{ inventory_hostname }}_interfaces
     state: touch
 
 - name: Run Command and parse with ntc_templates
@@ -34,4 +34,4 @@
   local_action: 
     module: copy 
     content: "{{ interfaces | to_nice_json }}" 
-    dest: /home/yuji/network_automation/output/interfaces-ntc/{{ datetime }}/{{ inventory_hostname }}-interfaces
+    dest: /home/yuji/network_automation/output/interfaces_ntc/{{ datetime }}/{{ inventory_hostname }}_interfaces
