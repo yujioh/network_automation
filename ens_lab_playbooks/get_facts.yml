@@ -23,5 +23,10 @@
 
     - name: Copy output to file
       copy:
-        content: "{{ ansible_facts }}" 
-        dest: /home/yuji/network_automation/output/get_facts/{{ datetime }}/{{ inventory_hostname }}_facts
+        content: "{{ ansible_facts | to_nice_yaml }}" 
+        dest: /home/yuji/network_automation/output/get_facts/{{ datetime }}/{{ inventory_hostname }}_facts.yml
+
+    - name: Copy output to file
+      copy:
+        content: "{{ ansible_facts | to_nice_json }}" 
+        dest: /home/yuji/network_automation/output/get_facts/{{ datetime }}/{{ inventory_hostname }}_facts.json
