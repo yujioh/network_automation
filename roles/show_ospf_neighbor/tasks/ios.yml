@@ -6,15 +6,15 @@
 
 - name: Parse Output to Variable
   set_fact:
-    device_neighbors: "{{ ospf_output.stdout[0] | parse_cli_textfsm('/home/yuji/network_automation/templates/textfsm-templates/cisco_ios_show_ip_ospf_neighbor.textfsm') }}"
+    ospf_neighbors: "{{ ospf_output.stdout[0] | parse_cli_textfsm('/home/yuji/network_automation/templates/textfsm-templates/cisco_ios_show_ip_ospf_neighbor.textfsm') }}"
 
 - name: Print Variable 
   debug:
-    msg: "{{ device_neighbors }}"
+    msg: "{{ ospf_neighbors }}"
 
 - name: Print Neighbor
   debug:
     msg: "Int: {{ item['INTERFACE'] }}: Nei {{ item['NEIGHBOR_ID'] }} IP:{{ item['ADDRESS'] }} "
-  loop: "{{ device_neighbors }}"
+  loop: "{{ ospf_neighbors }}"
   loop_control:
     label: "{{ item['INTERFACE'] }}"

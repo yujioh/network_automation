@@ -23,3 +23,9 @@
     - name: Include show ospf neighbor role
       include_role:
         name: "../roles/show_ospf_neighbor"
+
+    - name: Copy output to file
+      local_action: 
+        module: copy 
+        content: "{{ ospf_neighbor | to_nice_json }}" 
+        dest: /home/yuji/network_automation/output/ospf_neighbor/{{ datetime }}/{{ inventory_hostname }}_ospf_neighbor
