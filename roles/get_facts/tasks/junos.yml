@@ -1,4 +1,3 @@
----
 - name: gather juniper junos facts
   vars:
     ansible_connection: netconf

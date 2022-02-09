@@ -1,5 +1,4 @@
----
 - name: gather cisco nxos facts
-  cisco.nxos.nxos.facts:
+  cisco.nxos.facts:
     gather_subset: config
     gather_network_resources: "{{ network_resource | default('!vlans') }}"
