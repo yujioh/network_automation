@@ -24,8 +24,12 @@
       include_role:
         name: "../roles/show_ospf_database_textfsm"
 
-    - name: Copy output to file
-      local_action: 
-        module: copy 
+    - name: Copy output to JSON file
+      copy :
         content: "{{ ospf_database | to_nice_json }}" 
-        dest: /home/yuji/network_automation/output/ospf_database_textfsm/{{ datetime }}/{{ inventory_hostname }}_ospf_database
+        dest: /home/yuji/network_automation/output/ospf_database_textfsm/{{ datetime }}/{{ inventory_hostname }}_ospf_database.json
+
+    - name: Copy output to YAML file
+      copy :
+        content: "{{ ospf_database | to_nice_yaml }}" 
+        dest: /home/yuji/network_automation/output/ospf_database_textfsm/{{ datetime }}/{{ inventory_hostname }}_ospf_database.yml

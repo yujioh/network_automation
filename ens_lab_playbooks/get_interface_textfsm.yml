@@ -19,8 +19,12 @@
       include_role:
         name: "../roles/show_interface_textfsm"
 
-    - name: Copy output to file
-      local_action: 
-        module: copy 
+    - name: Copy output to JSON file
+      copy: 
         content: "{{ network_interfaces | to_nice_json }}" 
-        dest: /home/yuji/network_automation/output/interfaces_textfsm/{{ datetime }}/{{ inventory_hostname }}_interfaces
+        dest: /home/yuji/network_automation/output/interfaces_textfsm/{{ datetime }}/{{ inventory_hostname }}_interfaces.json
+
+    - name: Copy output to YAML file
+      copy: 
+        content: "{{ network_interfaces | to_nice_yaml }}" 
+        dest: /home/yuji/network_automation/output/interfaces_textfsm/{{ datetime }}/{{ inventory_hostname }}_interfaces.yml

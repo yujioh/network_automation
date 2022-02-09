@@ -24,18 +24,15 @@
       include_role:
         name: "../roles/show_interface_ntc"
 
-    - name: Copy output to file
+    - name: Copy output to YAML file
       copy:
-        content: "{{ interfaces }}" 
-        dest: /home/yuji/network_automation/output/interfaces_ntc/{{ datetime }}/{{ inventory_hostname }}_interfaces
+        content: "{{ interfaces | to_nice_yaml }}" 
+        dest: /home/yuji/network_automation/output/interfaces_ntc/{{ datetime }}/{{ inventory_hostname }}_interfaces.yml
 
-
-#    - name: Copy output to file
-#      local_action: 
-#        module: copy 
-#        content: "{{ interfaces | to_nice_json }}" 
-#        dest: /home/yuji/network_automation/output/interfaces_ntc/{{ datetime }}/{{ inventory_hostname }}_interfaces
-
+    - name: Copy output to JSON file
+      copy:
+        content: "{{ interfaces | to_nice_json }}" 
+        dest: /home/yuji/network_automation/output/interfaces_ntc/{{ datetime }}/{{ inventory_hostname }}_interfaces.json
 
 #- name: Print Variable 
 #  debug:

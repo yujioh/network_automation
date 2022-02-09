@@ -1,0 +1,35 @@
+---
+- name: Get ospf info
+  hosts: yuji_lab
+  gather_facts: no
+
+  tasks:
+    - name: Get Datetime
+      set_fact:
+        datetime: "{{ lookup('pipe','date +%Y%m%d%H%M') }}"
+      run_once: true
+
+    - name: ensure directory exists
+      file:
+        path: /home/yuji/network_automation/output/ip_route_textfsm/{{ datetime }}
+        state: directory
+      run_once: true
+        
+    - name: ensure file exists
+      file:
+        path: /home/yuji/network_automation/output/ip_route_textfsm/{{ datetime }}/{{ inventory_hostname }}_ip_route
+        state: touch
+
+    - name: Include show ospf database role
+      include_role:
+        name: "../roles/show_ip_route_textfsm"
+
+    - name: Copy output to JSON file
+      copy :
+        content: "{{ ip_route | to_nice_json }}" 
+        dest: /home/yuji/network_automation/output/ip_route_textfsm/{{ datetime }}/{{ inventory_hostname }}_ip_route.json
+
+    - name: Copy output to YAML file
+      copy :
+        content: "{{ ip_route | to_nice_yaml }}" 
+        dest: /home/yuji/network_automation/output/ip_route_textfsm/{{ datetime }}/{{ inventory_hostname }}_ip_route.yml

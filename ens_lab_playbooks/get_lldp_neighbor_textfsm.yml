@@ -11,7 +11,7 @@
 
     - name: ensure directory exists
       file:
-        path: /home/yuji/network_automation/output/lldp_neighbor_ntc/{{ datetime }}
+        path: /home/yuji/network_automation/output/lldp_neighbor_textfsm/{{ datetime }}
         state: directory
       run_once: true
         
@@ -22,16 +22,14 @@
 
     - name: Include show lldp neighbor role
       include_role:
-        name: "../roles/show_lldp_neighbor_ntc"
+        name: "../roles/show_lldp_neighbor_textfsm"
 
     - name: Copy output to JSON file
-      local_action: 
-        module: copy 
+      copy:
         content: "{{ lldp_neighbor | to_nice_json }}" 
-        dest: /home/yuji/network_automation/output/lldp_neighbor_ntc/{{ datetime }}/{{ inventory_hostname }}_lldp_neighbor.json
+        dest: /home/yuji/network_automation/output/lldp_neighbor_textfsm/{{ datetime }}/{{ inventory_hostname }}_lldp_neighbor.json
 
     - name: Copy output to YAML file
-      local_action: 
-        module: copy 
+      copy:
         content: "{{ lldp_neighbor | to_nice_yaml }}" 
-        dest: /home/yuji/network_automation/output/lldp_neighbor_ntc/{{ datetime }}/{{ inventory_hostname }}_lldp_neighbor.yml
+        dest: /home/yuji/network_automation/output/lldp_neighbor_textfsm/{{ datetime }}/{{ inventory_hostname }}_lldp_neighbor.yml
