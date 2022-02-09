@@ -1,6 +1,6 @@
 - name: Run Command and parse with ntc_templates
   ansible.utils.cli_parse:
-    command: show ospf neighbor
+    command: show ip ospf neighbor
     parser:
       name: ansible.netcommon.ntc_templates
-    set_fact: ospf_neighbor
+    set_fact: ospf_neighbors
