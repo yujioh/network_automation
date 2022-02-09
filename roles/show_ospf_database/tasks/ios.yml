@@ -1,0 +1,9 @@
+- name: Get OSPF Neighbor Output
+  ios_command:
+    commands:
+      - show ip ospf neighbor
+  register: ospf_output
+
+- name: Parse Output to Variable
+  set_fact:
+    ospf_database: "{{ ospf_output.stdout[0] | parse_cli_textfsm('/home/yuji/network_automation/templates/textfsm_templates/cisco_ios_show_ip_ospf_database.textfsm') }}"
