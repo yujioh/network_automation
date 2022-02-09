@@ -11,7 +11,7 @@
 
     - name: ensure directory exists
       file:
-        path: /home/yuji/network_automation/output/ospf_neighbor/{{ datetime }}
+        path: /home/yuji/network_automation/output/ospf_neighbor_textfsm/{{ datetime }}
         state: directory
       run_once: true
 
@@ -22,9 +22,9 @@
     - name: Copy output to JSON file
       copy: 
         content: "{{ ospf_neighbors | to_nice_json }}" 
-        dest: /home/yuji/network_automation/output/ospf_neighbor/{{ datetime }}/{{ inventory_hostname }}_ospf_neighbor.json
+        dest: /home/yuji/network_automation/output/ospf_neighbor_textfsm/{{ datetime }}/{{ inventory_hostname }}_ospf_neighbor.json
 
     - name: Copy output to YAML file
       copy:
         content: "{{ ospf_neighbors | to_nice_yaml }}" 
-        dest: /home/yuji/network_automation/output/ospf_neighbor/{{ datetime }}/{{ inventory_hostname }}_ospf_neighbor.yml
+        dest: /home/yuji/network_automation/output/ospf_neighbor_textfsm/{{ datetime }}/{{ inventory_hostname }}_ospf_neighbor.yml
