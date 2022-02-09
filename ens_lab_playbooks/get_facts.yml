@@ -1,15 +1,12 @@
 ---
 - name: Get router facts
   hosts: yuji_lab 
-  gather_facts: no
+  connection: network_cli
+  gather_facts: yes
 
   tasks:
-    - name: Include Get Fact
-      include_role:
-        name: "../roles/get_facts"
 
     - name: Copy output to file
-      local_action: 
-        module: copy 
-        content: "{{ ansible_network_resources | to_nice_json }}" 
+      copy:
+        content: "{{ ansible_facts }}" 
         dest: /home/yuji/network_automation/output/interfaces_ntc/{{ datetime }}/{{ inventory_hostname }}_facts

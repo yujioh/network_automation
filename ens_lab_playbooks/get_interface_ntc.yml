@@ -25,10 +25,16 @@
         name: "../roles/show_interface_ntc"
 
     - name: Copy output to file
-      local_action: 
-        module: copy 
-        content: "{{ interfaces | to_nice_json }}" 
+      copy:
+        content: "{{ interfaces }}" 
         dest: /home/yuji/network_automation/output/interfaces_ntc/{{ datetime }}/{{ inventory_hostname }}_interfaces
+
+
+#    - name: Copy output to file
+#      local_action: 
+#        module: copy 
+#        content: "{{ interfaces | to_nice_json }}" 
+#        dest: /home/yuji/network_automation/output/interfaces_ntc/{{ datetime }}/{{ inventory_hostname }}_interfaces
 
 
 #- name: Print Variable 
