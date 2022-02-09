@@ -1,9 +1,0 @@
----
-- name: Get BGP VPNV4 Summary
-  hosts: iosxr
-  gather_facts: no
-
-  tasks:
-    - name: Include show ip bgp vpnv4 unicast sum
-      include_role:
-        name: "../roles/show_ip_bgp_vpnv4_unicast_sum"
