@@ -12,3 +12,4 @@
     parser:
       name: ansible.netcommon.ntc_templates
     set_fact: ospf_neighbors
+  when: ansible_network_os != 'cisco.iosxr.iosxr'
