@@ -27,5 +27,5 @@
     - name: Copy output to file
       local_action: 
         module: copy 
-        content: "{{ ospf_neighbors[0] | to_nice_json }}" 
+        content: "{{ ospf_neighbors | to_nice_json }}" 
         dest: /home/yuji/network_automation/output/ospf_neighbor/{{ datetime }}/{{ inventory_hostname }}_ospf_neighbor
