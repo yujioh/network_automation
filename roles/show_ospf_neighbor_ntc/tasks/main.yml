@@ -1,3 +1,11 @@
+- name: Run Command and parse with ntc_templates iosxr
+  ansible.utils.cli_parse:
+    command: show ospf neighbor
+    parser:
+      name: ansible.netcommon.ntc_templates
+    set_fact: ospf_neighbors
+  when: {{ ansible_network_os }}= iosxr
+
 - name: Run Command and parse with ntc_templates
   ansible.utils.cli_parse:
     command: show ip ospf neighbor
