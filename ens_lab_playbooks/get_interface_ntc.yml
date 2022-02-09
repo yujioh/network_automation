@@ -6,7 +6,7 @@
   tasks:
     - name: Get Datetime
       set_fact:
-        datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
+        datetime: "{{ lookup('pipe','date +%Y%m%d%H%M') }}"
       run_once: true
 
     - name: ensure directory exists

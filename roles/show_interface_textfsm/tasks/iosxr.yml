@@ -1,8 +1,3 @@
-- name: ensure file exists
-  file:
-    path: /home/yuji/network_automation/output/interfaces_textfsm/{{ datetime }}/{{ inventory_hostname }}_interfaces
-    state: touch
-
 - name: Run Command and parse with textfsm
   ansible.utils.cli_parse:
     command: show interface
@@ -10,7 +5,3 @@
       name: ansible.utils.textfsm
       template_path: /home/yuji/network_automation/templates/textfsm_templates/cisco_iosxr_show_interfaces.textfsm
     set_fact: interfaces
-
-- name: Print Variable 
-  debug:
-    msg: "{{ interfaces }}"

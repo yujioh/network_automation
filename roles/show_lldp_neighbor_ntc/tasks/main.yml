@@ -1,29 +1,6 @@
-- name: Get Datetime
-  set_fact:
-    datetime: "{{ lookup('pipe','date +%Y-%m-%d-%H-%M') }}"
-  run_once: true
-
-- name: ensure directory exists
-  file:
-    path: /home/yuji/network_automation/output/lldp_neighbor_ntc/{{ datetime }}
-    state: directory
-  run_once: true
-    
-- name: ensure file exists
-  file:
-    path: /home/yuji/network_automation/output/lldp_neighbor_ntc/{{ datetime }}/{{ inventory_hostname }}_lldp_neighbor
-    state: touch
-
 - name: Run Command and parse with ntc_templates
   ansible.utils.cli_parse:
     command: show lldp neighbor
     parser:
       name: ansible.netcommon.ntc_templates
     set_fact: lldp_neighbor
-
-
-- name: Copy output to file
-  local_action: 
-    module: copy 
-    content: "{{ lldp_neighbor | to_nice_json }}" 
-    dest: /home/yuji/network_automation/output/lldp_neighbor_ntc/{{ datetime }}/{{ inventory_hostname }}_lldp_neighbor
