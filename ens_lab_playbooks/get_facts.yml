@@ -5,8 +5,23 @@
   gather_facts: yes
 
   tasks:
+    - name: Get Datetime
+      set_fact:
+        datetime: "{{ lookup('pipe','date +%Y%m%d%H%M') }}"
+      run_once: true
+
+    - name: ensure directory exists
+      file:
+        path: /home/yuji/network_automation/output/get_facts/{{ datetime }}
+        state: directory
+      run_once: true
+        
+    - name: ensure file exists
+      file:
+        path: /home/yuji/network_automation/output/get_facts/{{ datetime }}/{{ inventory_hostname }}_interfaces
+        state: touch
 
     - name: Copy output to file
       copy:
         content: "{{ ansible_facts }}" 
-        dest: /home/yuji/network_automation/output/interfaces_ntc/{{ datetime }}/{{ inventory_hostname }}_facts
+        dest: /home/yuji/network_automation/output/get_facts/{{ datetime }}/{{ inventory_hostname }}_facts
