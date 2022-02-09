@@ -17,15 +17,15 @@
         
     - name: ensure file exists
       file:
-        path: /home/yuji/network_automation/output/ospf_database/{{ datetime }}/{{ inventory_hostname }}_ospf_database
+        path: /home/yuji/network_automation/output/ospf_database/{{ datetime }}/{{ inventory_hostname }}_ospf_database_textfsm
         state: touch
 
     - name: Include show ospf database role
       include_role:
-        name: "../roles/show_ospf_database"
+        name: "../roles/show_ospf_database_textfsm"
 
     - name: Copy output to file
       local_action: 
         module: copy 
         content: "{{ ospf_database | to_nice_json }}" 
-        dest: /home/yuji/network_automation/output/ospf_database/{{ datetime }}/{{ inventory_hostname }}_ospf_database
+        dest: /home/yuji/network_automation/output/ospf_database/{{ datetime }}/{{ inventory_hostname }}_ospf_database_textfsm
