@@ -3,11 +3,11 @@
     command: show interface
     parser:
       name: ansible.netcommon.ntc_templates
-    set_fact: interfaces
+    set_fact: network_interfaces
 
 - name: Print Variable 
   debug:
-    msg: "{{ interfaces }}"
+    msg: "{{ network_interfaces }}"
 
 #- name: Copy output to file
 #  local_action: 

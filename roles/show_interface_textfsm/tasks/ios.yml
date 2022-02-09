@@ -4,4 +4,4 @@
     parser:
       name: ansible.utils.textfsm
       template_path: /home/yuji/network_automation/templates/textfsm_templates/cisco_ios_show_interfaces.textfsm
-    set_fact: interfaces
+    set_fact: network_interfaces

@@ -22,5 +22,5 @@
     - name: Copy output to file
       local_action: 
         module: copy 
-        content: "{{ interfaces | to_nice_json }}" 
+        content: "{{ network_interfaces | to_nice_json }}" 
         dest: /home/yuji/network_automation/output/interfaces_textfsm/{{ datetime }}/{{ inventory_hostname }}_interfaces
