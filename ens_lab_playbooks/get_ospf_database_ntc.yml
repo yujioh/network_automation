@@ -17,7 +17,7 @@
         
     - name: ensure file exists
       file:
-        path: /home/yuji/network_automation/output/ospf_database_ntc/{{ datetime }}/{{ inventory_hostname }}_ospf_database
+        path: /home/yuji/network_automation/output/ospf_database_ntc/{{ datetime }}/{{ inventory_hostname }}_ospf_database_ntc
         state: touch
 
     - name: Include show ospf database role
@@ -28,4 +28,4 @@
       local_action: 
         module: copy 
         content: "{{ ospf_database | to_nice_json }}" 
-        dest: /home/yuji/network_automation/output/ospf_database_ntc/{{ datetime }}/{{ inventory_hostname }}_ospf_database
+        dest: /home/yuji/network_automation/output/ospf_database_ntc/{{ datetime }}/{{ inventory_hostname }}_ospf_database_ntc
