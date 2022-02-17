@@ -13,5 +13,5 @@
 #  local_action: 
 #    module: copy 
 #    content: "{{ interfaces | to_nice_json }}" 
-#    dest: /home/yuji/network_automation/output/interfaces_ntc/{{ datetime }}/{{ inventory_hostname }}_interfaces
+#    dest: /home/yuji/network_automation/output/interfaces_ntc/{{ datetime }}_{{ inventory_hostname }}_interfaces
 

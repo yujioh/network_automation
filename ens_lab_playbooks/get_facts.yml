@@ -12,21 +12,21 @@
 
     - name: ensure directory exists
       file:
-        path: /home/yuji/network_automation/output/get_facts/{{ datetime }}
+        path: /home/yuji/network_automation/output/get_facts/
         state: directory
       run_once: true
         
     - name: ensure file exists
       file:
-        path: /home/yuji/network_automation/output/get_facts/{{ datetime }}/{{ inventory_hostname }}_interfaces
+        path: /home/yuji/network_automation/output/get_facts/{{ datetime }}_{{ inventory_hostname }}_interfaces
         state: touch
 
     - name: Copy output to file
       copy:
         content: "{{ ansible_facts | to_nice_yaml }}" 
-        dest: /home/yuji/network_automation/output/get_facts/{{ datetime }}/{{ inventory_hostname }}_facts.yml
+        dest: /home/yuji/network_automation/output/get_facts/{{ datetime }}_{{ inventory_hostname }}_facts.yml
 
     - name: Copy output to file
       copy:
         content: "{{ ansible_facts | to_nice_json }}" 
-        dest: /home/yuji/network_automation/output/get_facts/{{ datetime }}/{{ inventory_hostname }}_facts.json
+        dest: /home/yuji/network_automation/output/get_facts/{{ datetime }}_{{ inventory_hostname }}_facts.json

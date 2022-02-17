@@ -11,14 +11,9 @@
 
     - name: ensure directory exists
       file:
-        path: /home/yuji/network_automation/output/ospf_database_textfsm/{{ datetime }}
+        path: /home/yuji/network_automation/output/ospf_database_textfsm/
         state: directory
       run_once: true
-        
-#    - name: ensure file exists
-#      file:
-#        path: /home/yuji/network_automation/output/ospf_database_textfsm/{{ datetime }}/{{ inventory_hostname }}_ospf_database
-#        state: touch
 
     - name: Include show ospf database role
       include_role:
@@ -27,9 +22,9 @@
     - name: Copy output to JSON file
       copy :
         content: "{{ ospf_database | to_nice_json }}" 
-        dest: /home/yuji/network_automation/output/ospf_database_textfsm/{{ datetime }}/{{ inventory_hostname }}_ospf_database.json
+        dest: /home/yuji/network_automation/output/ospf_database_textfsm/{{ datetime }}_{{ inventory_hostname }}_ospf_database.json
 
     - name: Copy output to YAML file
       copy :
         content: "{{ ospf_database | to_nice_yaml }}" 
-        dest: /home/yuji/network_automation/output/ospf_database_textfsm/{{ datetime }}/{{ inventory_hostname }}_ospf_database.yml
+        dest: /home/yuji/network_automation/output/ospf_database_textfsm/{{ datetime }}_{{ inventory_hostname }}_ospf_database.yml

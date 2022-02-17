@@ -11,14 +11,9 @@
 
     - name: ensure directory exists
       file:
-        path: /home/yuji/network_automation/output/interfaces_ntc/{{ datetime }}
+        path: /home/yuji/network_automation/output/interfaces_ntc/
         state: directory
       run_once: true
-        
-    - name: ensure file exists
-      file:
-        path: /home/yuji/network_automation/output/interfaces_ntc/{{ datetime }}/{{ inventory_hostname }}_interfaces
-        state: touch
 
     - name: Include show interface role
       include_role:
@@ -27,12 +22,12 @@
     - name: Copy output to YAML file
       copy:
         content: "{{ interfaces | to_nice_yaml }}" 
-        dest: /home/yuji/network_automation/output/interfaces_ntc/{{ datetime }}/{{ inventory_hostname }}_interfaces.yml
+        dest: /home/yuji/network_automation/output/interfaces_ntc/{{ datetime }}_{{ inventory_hostname }}_interfaces.yml
 
     - name: Copy output to JSON file
       copy:
         content: "{{ interfaces | to_nice_json }}" 
-        dest: /home/yuji/network_automation/output/interfaces_ntc/{{ datetime }}/{{ inventory_hostname }}_interfaces.json
+        dest: /home/yuji/network_automation/output/interfaces_ntc/{{ datetime }}_{{ inventory_hostname }}_interfaces.json
 
 #- name: Print Variable 
 #  debug:

@@ -11,14 +11,9 @@
 
     - name: ensure directory exists
       file:
-        path: /home/yuji/network_automation/output/ospf_database_ntc/{{ datetime }}
+        path: /home/yuji/network_automation/output/ospf_database_ntc/
         state: directory
       run_once: true
-        
-#    - name: ensure file exists
-#      file:
-#        path: /home/yuji/network_automation/output/ospf_database_ntc/{{ datetime }}/{{ inventory_hostname }}_ospf_database_ntc
-#        state: touch
 
     - name: Include show ospf database role
       include_role:
@@ -27,9 +22,9 @@
     - name: Copy output to JSON file
       copy:
         content: "{{ ospf_database | to_nice_json }}" 
-        dest: /home/yuji/network_automation/output/ospf_database_ntc/{{ datetime }}/{{ inventory_hostname }}_ospf_database_ntc.json
+        dest: /home/yuji/network_automation/output/ospf_database_ntc/{{ datetime }}_{{ inventory_hostname }}_ospf_database_ntc.json
 
     - name: Copy output to YAML file
       copy:
         content: "{{ ospf_database | to_nice_yaml }}" 
-        dest: /home/yuji/network_automation/output/ospf_database_ntc/{{ datetime }}/{{ inventory_hostname }}_ospf_database_ntc.yml
+        dest: /home/yuji/network_automation/output/ospf_database_ntc/{{ datetime }}_{{ inventory_hostname }}_ospf_database_ntc.yml

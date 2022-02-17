@@ -11,14 +11,9 @@
 
     - name: ensure directory exists
       file:
-        path: /home/yuji/network_automation/output/ip_route_textfsm/{{ datetime }}
+        path: /home/yuji/network_automation/output/ip_route_textfsm/
         state: directory
       run_once: true
-        
-    - name: ensure file exists
-      file:
-        path: /home/yuji/network_automation/output/ip_route_textfsm/{{ datetime }}/{{ inventory_hostname }}_ip_route
-        state: touch
 
     - name: Include show ospf database role
       include_role:
@@ -27,9 +22,9 @@
     - name: Copy output to JSON file
       copy :
         content: "{{ ip_route | to_nice_json }}" 
-        dest: /home/yuji/network_automation/output/ip_route_textfsm/{{ datetime }}/{{ inventory_hostname }}_ip_route.json
+        dest: /home/yuji/network_automation/output/ip_route_textfsm/{{ datetime }}_{{ inventory_hostname }}_ip_route.json
 
     - name: Copy output to YAML file
       copy :
         content: "{{ ip_route | to_nice_yaml }}" 
-        dest: /home/yuji/network_automation/output/ip_route_textfsm/{{ datetime }}/{{ inventory_hostname }}_ip_route.yml
+        dest: /home/yuji/network_automation/output/ip_route_textfsm/{{ datetime }}_{{ inventory_hostname }}_ip_route.yml
