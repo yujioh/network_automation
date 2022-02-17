@@ -1,6 +1,6 @@
 ---
 - name: Get ospf info
-  hosts: yuji_lab
+  hosts: eos,nxos
   gather_facts: no
 
   tasks:
@@ -26,10 +26,10 @@
 
     - name: Copy output to  JSON file
       copy: 
-        content: "{{ ospf_databases | to_nice_json }}" 
+        content: "{{ ospf_database | to_nice_json }}" 
         dest: /home/yuji/network_automation/output/ospf_database_json/{{ datetime }}/{{ inventory_hostname }}_ospf_database.json
 
     - name: Copy output to  YAML file
       copy: 
-        content: "{{ ospf_databases | to_nice_yaml }}" 
+        content: "{{ ospf_database | to_nice_yaml }}" 
         dest: /home/yuji/network_automation/output/ospf_database_json/{{ datetime }}/{{ inventory_hostname }}_ospf_database.yml
