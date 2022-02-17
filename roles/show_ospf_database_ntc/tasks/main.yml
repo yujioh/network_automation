@@ -1,6 +1,5 @@
-- name: Run Command and parse with ntc_templates
-  ansible.utils.cli_parse:
-    command: show ip ospf database
-    parser:
-      name: ansible.netcommon.ntc_templates
-    set_fact: ospf_database
+- name: show ospf database
+  include: "{{ item }}"
+  with_first_found:
+  - "{{ ansible_network_os }}.yml"
+  - "all.yml"
