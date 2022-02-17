@@ -3,5 +3,5 @@
     command: show ip ospf database
     parser:
       name: ansible.utils.textfsm
-      template_path: /home/yuji/network_automation/templates/textfsm_templates/arista_eos_show_ip_ospf_database.textfsm
+      template_path: /home/yuji/network_automation/templates/textfsm_templates/arista_eos_show_lldp_neighbors.textfsm
     set_fact: ospf_database

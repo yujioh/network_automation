@@ -3,5 +3,5 @@
     command: show lldp neighbor
     parser:
       name: ansible.utils.textfsm
-      template_path: /home/yuji/network_automation/templates/textfsm_templates/cisco_ios_show_lldp.textfsm
+      template_path: /home/yuji/network_automation/templates/textfsm_templates/cisco_ios_show_lldp_netighbors.textfsm
     set_fact: ospf_database
