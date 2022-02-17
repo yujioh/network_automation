@@ -1,0 +1,6 @@
+- name: Run Command and parse with ntc_templates
+  ansible.utils.cli_parse:
+    command: show ip ospf database | json
+    parser:
+      name: ansible.utils.json
+    set_fact: ospf_database

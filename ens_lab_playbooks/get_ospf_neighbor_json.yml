@@ -1,0 +1,35 @@
+---
+- name: Get ospf info
+  hosts: yuji_lab
+  gather_facts: no
+
+  tasks:
+    - name: Get Datetime
+      set_fact:
+        datetime: "{{ lookup('pipe','date +%Y%m%d%H%M') }}"
+      run_once: true
+
+    - name: ensure directory exists
+      file:
+        path: /home/yuji/network_automation/output/ospf_neighbor_json/{{ datetime }}
+        state: directory
+      run_once: true
+        
+#    - name: ensure file exists
+#      file:
+#        path: /home/yuji/network_automation/output/ospf_neighbor_json/{{ datetime }}/{{ inventory_hostname }}_ospf_neighbor
+#        state: touch
+
+    - name: Include show ospf neighbor role
+      include_role:
+        name: "../roles/show_ospf_neighbor_json"
+
+    - name: Copy output to  JSON file
+      copy: 
+        content: "{{ ospf_neighbors | to_nice_json }}" 
+        dest: /home/yuji/network_automation/output/ospf_neighbor_json/{{ datetime }}/{{ inventory_hostname }}_ospf_neighbor.json
+
+    - name: Copy output to  YAML file
+      copy: 
+        content: "{{ ospf_neighbors | to_nice_yaml }}" 
+        dest: /home/yuji/network_automation/output/ospf_neighbor_json/{{ datetime }}/{{ inventory_hostname }}_ospf_neighbor.yml

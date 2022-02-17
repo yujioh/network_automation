@@ -1,0 +1,4 @@
+- fail:
+    msg:
+    - "Network Platform does not support JSON output at this time"
+
