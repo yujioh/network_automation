@@ -1,6 +1,6 @@
 ---
 - name: Get ospf info
-  hosts: eos,nxos
+  hosts: yuji_lab
   gather_facts: no
 
   tasks:
