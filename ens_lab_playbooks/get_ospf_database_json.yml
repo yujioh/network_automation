@@ -11,25 +11,25 @@
 
     - name: ensure directory exists
       file:
-        path: /home/yuji/network_automation/output/ospf_neighbor_json/{{ datetime }}
+        path: /home/yuji/network_automation/output/ospf_database_json/{{ datetime }}
         state: directory
       run_once: true
         
 #    - name: ensure file exists
 #      file:
-#        path: /home/yuji/network_automation/output/ospf_neighbor_json/{{ datetime }}/{{ inventory_hostname }}_ospf_neighbor
+#        path: /home/yuji/network_automation/output/ospf_database_json/{{ datetime }}/{{ inventory_hostname }}_ospf_database
 #        state: touch
 
-    - name: Include show ospf neighbor role
+    - name: Include show ospf database role
       include_role:
-        name: "../roles/show_ospf_neighbor_json"
+        name: "../roles/show_ospf_database_json"
 
     - name: Copy output to  JSON file
       copy: 
-        content: "{{ ospf_neighbors | to_nice_json }}" 
-        dest: /home/yuji/network_automation/output/ospf_neighbor_json/{{ datetime }}/{{ inventory_hostname }}_ospf_neighbor.json
+        content: "{{ ospf_databases | to_nice_json }}" 
+        dest: /home/yuji/network_automation/output/ospf_database_json/{{ datetime }}/{{ inventory_hostname }}_ospf_database.json
 
     - name: Copy output to  YAML file
       copy: 
-        content: "{{ ospf_neighbors | to_nice_yaml }}" 
-        dest: /home/yuji/network_automation/output/ospf_neighbor_json/{{ datetime }}/{{ inventory_hostname }}_ospf_neighbor.yml
+        content: "{{ ospf_databases | to_nice_yaml }}" 
+        dest: /home/yuji/network_automation/output/ospf_database_json/{{ datetime }}/{{ inventory_hostname }}_ospf_database.yml
