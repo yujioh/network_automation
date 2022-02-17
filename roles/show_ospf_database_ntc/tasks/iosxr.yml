@@ -1,8 +1,7 @@
-- name: Run Command and parse with ntc_templates
+- name: Run Command and parse with textfsm
   ansible.utils.cli_parse:
-    command: show ospf database
+    command: show ip ospf database
     parser:
-      name: ansible.netcommon.ntc_templates
+      name: ansible.utils.textfsm
+      template_path: /home/yuji/network_automation/templates/textfsm_templates/cisco_ios_show_ip_ospf_database.textfsm
     set_fact: ospf_database
-
-
