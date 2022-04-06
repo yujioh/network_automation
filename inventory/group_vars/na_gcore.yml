@@ -12,7 +12,7 @@ snmp_v3_group_name:
   - snmp_group
 snmp_v3_username:
   - test
-vrfs:
+vrf:
   - name: "mgmt-vrf"
     description: "Management VRF"
     rd: "65000:1"

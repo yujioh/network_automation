@@ -4,6 +4,5 @@
       servers:
         - server: "{{ item }}"
           vrf: "{{ mgmt_vrf }}"
-          key: "{{ ntp_server_key }}"
           source: "{{ ios_mgmt_intf }}"
       loop: "{{ ntp_servers }}"
