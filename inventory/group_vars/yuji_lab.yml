@@ -1,0 +1,19 @@
+---
+login_banner: "UNAUTHORIZED ACCESS TO THIS DEVICE IS PROHIBITED"
+dns_servers:
+  - 192.168.2.102
+ntp_servers:
+  - 10.220.1.15
+ntp_acl: 
+  - 192.168.10.10
+snmp_ipv4_servers:
+  - 192.168.10.10
+snmp_v3_group_name:
+  - snmp_group
+snmp_v3_username:
+  - test
+snmp:
+  commands:
+    - snmp-server group "{{ snmp_vcommunity ansible RO
+    - snmp-server contact Networking
+    - snmp-server location Lab
