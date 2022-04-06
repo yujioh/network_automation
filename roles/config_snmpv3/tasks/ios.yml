@@ -1,6 +1,10 @@
 - name: Configure SNMP Group and Host
   cisco.ios.ios_snmp_server:
     config:
+      communities:
+      - acl_v4: "{{ snmp_acl }}"
+        rw: true
+
       groups:
       - group: "{{ snmp_v3_group_name }}"
         version: v3
@@ -12,16 +16,8 @@
         version_option: priv
         vrf: "{{ mgmt_vrf }}" 
         loop: "{{ snmp_ipv4_servers }}"
-        when: management_band_type == 'oob'
       
-      - host: "{{ snmp_ipv4_servers }}"
+      users:
+      - group: "{{ snmp_v3_groupname }}"
+        username: "{{ snmp_v3_username }}"
         version: v3
-        version_option: priv
-        loop: "{{ snmp_ipv4_servers }}"
-        when: management_band_type == 'inband'
-      
-- name: Configure SNMP User
-  cisco.ios.ios_config:
-    lines:
-      - "snmp-server user {{ snmp_v3_username }} {{ snmp_v3_group_name }} v3 auth sha {{ snmp_sha_authentication_key }} priv aes 128 {{ snmp_aes_encryption_key }} access {{ snmp_ipv4_acl }}
-

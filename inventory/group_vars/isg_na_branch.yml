@@ -12,8 +12,4 @@ snmp_v3_group_name:
   - snmp_group
 snmp_v3_username:
   - test
-snmp:
-  commands:
-    - snmp-server group "{{ snmp_vcommunity ansible RO
-    - snmp-server contact Networking
-    - snmp-server location Lab
+
