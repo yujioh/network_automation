@@ -3,7 +3,7 @@
   hosts: yuji_lab
   gather_facts: no
   vars_files:
-    - /home/yuji/network_automation/inventory/group_vars/yuij_lab.yml
+    - /home/yuji/inventory/group_vars/yuij_lab.yml
   
   tasks:
     - name: Configure DNS
