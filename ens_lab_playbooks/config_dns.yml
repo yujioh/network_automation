@@ -3,10 +3,9 @@
   hosts: yuji_lab
   connection: network_cli
   gather_facts: no
-  become: yes
   
   tasks:
-    - name: Configure SNMP
+    - name: Configure DNS
       include_role:
-        name: ../roles/config_dns
+        name: "../roles/config_dns"
       dns-servers: "192.168.10.10"
