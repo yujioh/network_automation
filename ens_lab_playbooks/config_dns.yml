@@ -2,10 +2,10 @@
 - name: Configure DNS
   hosts: yuji_lab
   gather_facts: no
+  vars:
+    dns-servers: "192.168.10.10" 
   
   tasks:
     - name: Configure DNS
       include_role:
         name: "../roles/config_dns"
-      vars:
-        dns-servers: "192.168.10.10"
