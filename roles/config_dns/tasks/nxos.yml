@@ -1,0 +1,4 @@
+---
+- name: CONFIGURE DNS
+  cisco.nxos.nxos_system:
+    name_servers: "{{ dns_servers }}"

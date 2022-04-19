@@ -1,0 +1,5 @@
+---
+- name: CONFIGURE DNS
+  cisco.ios.ios_system:
+    name_servers: "{{ dns_servers }}"
+

@@ -1,0 +1,4 @@
+---
+- name: CONFIGURE DNS
+  arista.eos.eos_system:
+    name_servers: "{{ dns_servers }}"
