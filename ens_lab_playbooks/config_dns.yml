@@ -2,8 +2,8 @@
 - name: Configure DNS
   hosts: yuji_lab
   gather_facts: no
-  vars:
-    dns-servers: "192.168.10.10" 
+  vars_files:
+    - ../inventory/group_vars/yuij_lab.yml
   
   tasks:
     - name: Configure DNS
