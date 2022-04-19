@@ -1,5 +1,6 @@
 ---
-- name: CONFIGURE DNS
+- include_vars: ../../inventory/group_vars/yuji_lab.yml
+  name: CONFIGURE DNS
   cisco.ios.ios_system:
     name_servers: "{{ dns_servers }}"
 
