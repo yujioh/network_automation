@@ -1,0 +1,32 @@
+---
+- name: Configure DNS
+  hosts: yuji_lab
+  connection: network_cli
+  gather_facts: no
+  become: yes
+  
+  tasks:
+    - name: Configure DNS
+      ios_system:
+        hostname: "{{ inventory_hostname_short }}"
+        name_servers: "{{ dns_servers }}"
+      notify: "save ios"
+    
+    - name: load banner onto network device
+      vars:
+        - network_banner:  "{{ net_banner | default(None) }}"
+        - banner_type: "{{ net_type | default('login') }}"
+      include_role:
+        name: "../roles/config_banner"
+
+    - name: Enable physical interfaces and add description
+      include_role:
+        name: ../roles/config_interfaces
+ 
+    - name: Configure L3 Interfaces
+      include_role:
+        name: ../roles/config_l3_interfaces
+
+    - name: Configure SNMP
+      include_role:
+        name: ../roles/config_snmpv3
